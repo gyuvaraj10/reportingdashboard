@@ -1,6 +1,13 @@
 version: '3.7'
 services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
   db:
     image: solr:8.1.1
     ports:
       - "8983:8983"
+  app:
+    build:
+          
