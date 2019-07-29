@@ -20,7 +20,7 @@ export class SolrclientService {
   
   summaryOfTestExecutionResults_facet_pivot_url="http://localhost:8983/solr/gettingstarted/select?q=servicename:*&facet=true&facet.field=servicename&facet.pivot=servicename,status&indent=true";
 
-  serviceTestStatsByStatus="http://localhost:8983/solr/gettingstarted/select?q=servicename:{%servicename}&fq=status:{%status}&rows=200&indent=true";
+  serviceTestStatsByStatus="http://localhost:8983/solr/gettingstarted/select?q=servicename:{%servicename}&fq=status:{%status}&rows=2000&indent=true";
 
   getTestExecutionSumamry() {
     return this.http.get(this.summaryOfTestExecutionResults_facet_pivot_url).toPromise();
@@ -31,7 +31,7 @@ export class SolrclientService {
   }
 
   getStats(serviceName: string) {
-    let url = this.baseUrl+"?q=servicename:"+serviceName+"&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=200&indent=true";
+    let url = this.baseUrl+"?q=servicename:"+serviceName+"&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=2000&indent=true";
     return this.http.get(url).toPromise();
   }
 

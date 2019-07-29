@@ -24,6 +24,7 @@ export class ProjectDashboardComponent implements OnInit {
   page = 1;
   pageSize = 10;
   collectionSize = 0;
+  progress=100;
   
   constructor(private solrClient: SolrclientService, private route: ActivatedRoute) {   }
   
