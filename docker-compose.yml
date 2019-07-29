@@ -8,6 +8,10 @@ services:
     image: solr:8.1.1
     ports:
       - "8983:8983"
+    entrypoint:
+      - docker-entrypoint.sh 
+      - solr-precreate
+      - gettingstarted
   app:
     build: .
     command: "npm start"
@@ -19,4 +23,6 @@ services:
       - "49153"
     volumes:
       - "./:/app/"
+    dependes:
+      - db  
           

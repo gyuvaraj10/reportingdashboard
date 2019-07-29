@@ -51,6 +51,14 @@ export class ProjectDashboardComponent implements OnInit {
       }
       
     }).catch(error => {
+      this.testSummary = {
+        totalTests:0,
+        totalPass: 0,
+        totalFail: 0,
+        totalSkipped: 0,
+        passPercentage: 0,
+        failPercentage: 0
+      }
       console.log(error);
     })
   }
