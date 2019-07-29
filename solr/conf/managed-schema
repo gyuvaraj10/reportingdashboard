@@ -69,7 +69,7 @@
   <fieldType name="random" class="solr.RandomSortField" indexed="true"/>
   <fieldType name="string" class="solr.StrField" sortMissingLast="true" docValues="true"/>
   <fieldType name="strings" class="solr.StrField" sortMissingLast="true" docValues="true" multiValued="true"/>
-  <fieldType name="text_ar" class="solr.TextField" positionIncrementGap="100">
+  <!-- <fieldType name="text_ar" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.LowerCaseFilterFactory"/>
@@ -94,7 +94,7 @@
       <filter class="solr.StopFilterFactory" words="lang/stopwords_ca.txt" ignoreCase="true"/>
       <filter class="solr.SnowballPorterFilterFactory" language="Catalan"/>
     </analyzer>
-  </fieldType>
+  </fieldType> -->
   <fieldType name="text_cjk" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -103,7 +103,7 @@
       <filter class="solr.CJKBigramFilterFactory"/>
     </analyzer>
   </fieldType>
-  <fieldType name="text_cz" class="solr.TextField" positionIncrementGap="100">
+  <!-- <fieldType name="text_cz" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.LowerCaseFilterFactory"/>
@@ -135,7 +135,7 @@
       <filter class="solr.StopFilterFactory" words="lang/stopwords_el.txt" ignoreCase="false"/>
       <filter class="solr.GreekStemFilterFactory"/>
     </analyzer>
-  </fieldType>
+  </fieldType> -->
   <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100">
     <analyzer type="index">
       <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -198,7 +198,7 @@
       <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
     </analyzer>
   </fieldType>
-  <fieldType name="text_es" class="solr.TextField" positionIncrementGap="100">
+  <!-- <fieldType name="text_es" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.LowerCaseFilterFactory"/>
@@ -240,8 +240,8 @@
       <filter class="solr.StopFilterFactory" format="snowball" words="lang/stopwords_fr.txt" ignoreCase="true"/>
       <filter class="solr.FrenchLightStemFilterFactory"/>
     </analyzer>
-  </fieldType>
-  <fieldType name="text_ga" class="solr.TextField" positionIncrementGap="100">
+  </fieldType> -->
+  <!-- <fieldType name="text_ga" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.ElisionFilterFactory" articles="lang/contractions_ga.txt" ignoreCase="true"/>
@@ -250,7 +250,7 @@
       <filter class="solr.StopFilterFactory" words="lang/stopwords_ga.txt" ignoreCase="true"/>
       <filter class="solr.SnowballPorterFilterFactory" language="Irish"/>
     </analyzer>
-  </fieldType>
+  </fieldType> -->
   <fieldType name="text_gen_sort" class="solr.SortableTextField" positionIncrementGap="100" multiValued="true">
     <analyzer type="index">
       <tokenizer class="solr.StandardTokenizerFactory"/>
@@ -291,7 +291,7 @@
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
   </fieldType>
-  <fieldType name="text_gl" class="solr.TextField" positionIncrementGap="100">
+  <!-- <fieldType name="text_gl" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.LowerCaseFilterFactory"/>
@@ -352,7 +352,7 @@
       <filter class="solr.JapaneseKatakanaStemFilterFactory" minimumLength="4"/>
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
-  </fieldType>
+  </fieldType> -->
   <fieldType name="text_ko" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.KoreanTokenizerFactory" outputUnknownUnigrams="false" decompoundMode="discard"/>
@@ -361,7 +361,7 @@
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
   </fieldType>
-  <fieldType name="text_lv" class="solr.TextField" positionIncrementGap="100">
+  <!-- <fieldType name="text_lv" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.LowerCaseFilterFactory"/>
@@ -432,7 +432,7 @@
       <filter class="solr.StopFilterFactory" words="lang/stopwords_tr.txt" ignoreCase="false"/>
       <filter class="solr.SnowballPorterFilterFactory" language="Turkish"/>
     </analyzer>
-  </fieldType>
+  </fieldType> -->
   <fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
@@ -465,11 +465,11 @@
   <dynamicField name="*_txt_rev" type="text_general_rev" indexed="true" stored="true"/>
   <dynamicField name="*_phon_en" type="phonetic_en" indexed="true" stored="true"/>
   <dynamicField name="*_s_lower" type="lowercase" indexed="true" stored="true"/>
-  <dynamicField name="*_txt_cjk" type="text_cjk" indexed="true" stored="true"/>
+  <!-- <dynamicField name="*_txt_cjk" type="text_cjk" indexed="true" stored="true"/> -->
   <dynamicField name="random_*" type="random"/>
   <dynamicField name="*_t_sort" type="text_gen_sort" multiValued="false" indexed="true" stored="true"/>
   <dynamicField name="*_txt_en" type="text_en" indexed="true" stored="true"/>
-  <dynamicField name="*_txt_ar" type="text_ar" indexed="true" stored="true"/>
+  <!-- <dynamicField name="*_txt_ar" type="text_ar" indexed="true" stored="true"/>
   <dynamicField name="*_txt_bg" type="text_bg" indexed="true" stored="true"/>
   <dynamicField name="*_txt_ca" type="text_ca" indexed="true" stored="true"/>
   <dynamicField name="*_txt_cz" type="text_cz" indexed="true" stored="true"/>
@@ -498,7 +498,7 @@
   <dynamicField name="*_txt_ru" type="text_ru" indexed="true" stored="true"/>
   <dynamicField name="*_txt_sv" type="text_sv" indexed="true" stored="true"/>
   <dynamicField name="*_txt_th" type="text_th" indexed="true" stored="true"/>
-  <dynamicField name="*_txt_tr" type="text_tr" indexed="true" stored="true"/>
+  <dynamicField name="*_txt_tr" type="text_tr" indexed="true" stored="true"/> -->
   <dynamicField name="*_point" type="point" indexed="true" stored="true"/>
   <dynamicField name="*_srpt" type="location_rpt" indexed="true" stored="true"/>
   <dynamicField name="attr_*" type="text_general" multiValued="true" indexed="true" stored="true"/>
