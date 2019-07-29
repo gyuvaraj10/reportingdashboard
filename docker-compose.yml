@@ -5,22 +5,22 @@ services:
     ports:
       - "8080:80"
   db:
-    image: solr:8.1.1
+    build:
+      context: ./solr
     ports:
       - "8983:8983"
     entrypoint:
       - docker-entrypoint.sh 
       - solr-precreate
       - gettingstarted
+       - /tmp/gettingstarted
   app:
     build: .
     command: "npm start"
     ports:
       - "4200:4200" 
-      - "49153:49153"
     expose:
       - "4200" 
-      - "49153"
     volumes:
       - "./:/app/"
     dependes:
