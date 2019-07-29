@@ -9,5 +9,14 @@ services:
     ports:
       - "8983:8983"
   app:
-    build:
+    build: .
+    command: "npm start"
+    ports:
+      - "4200:4200" 
+      - "49153:49153"
+    expose:
+      - "4200" 
+      - "49153"
+    volumes:
+      - "./:/app/"
           

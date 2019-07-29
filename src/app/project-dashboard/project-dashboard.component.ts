@@ -33,8 +33,8 @@ export class ProjectDashboardComponent implements OnInit {
     this.projectName = name;
     this.solrClient.getStats(name)
     .then(resp => {
-      if(resp && resp.response) {
-        var docs = resp.response.docs;
+      if(resp && resp['response']) {
+        var docs = resp['response'].docs;
         this.tests = docs;
         var passCases = docs.filter(x=> x.passed);
         var skipped = docs.filter(x=>x.skipped);
@@ -59,8 +59,8 @@ export class ProjectDashboardComponent implements OnInit {
     console.log(status);
     if(status=='total') {
       this.solrClient.getStats(serviceName).then(resp => {
-        if(resp && resp.response) {
-          var docs = resp.response.docs;
+        if(resp && resp['response']) {
+          var docs = resp['response'].docs;
           this.tests = docs;
           this.collectionSize = this.tests.length;
         }
@@ -69,8 +69,8 @@ export class ProjectDashboardComponent implements OnInit {
       })
     } else {
       this.solrClient.getTestStatsUrlByServiceAndStatus(serviceName, status).then(resp => {
-        if(resp && resp.response) {
-          var docs = resp.response.docs;
+        if(resp && resp['response']) {
+          var docs = resp['response'].docs;
           this.tests = docs;
           this.collectionSize = this.tests.length;
         }
@@ -86,7 +86,7 @@ export class ProjectDashboardComponent implements OnInit {
   }
 
   getAlertStyle() {
-    var rate = this.testSummary.passPercentage;
+    var rate = this.testSummary['passPercentage'];
     if(rate ==100) {
       return "alert alert-success";
     } else if(rate <100 && rate >60) {
