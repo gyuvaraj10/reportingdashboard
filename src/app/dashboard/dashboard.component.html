@@ -1,0 +1,30 @@
+<div>
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Service Name</th>
+            <th scope="col">Total Tests</th>
+            <th scope="col">Total Pass</th>
+            <th scope="col">Total Fail</th>
+            <th scope="col">Total Skipped</th>
+            <th scope="col">Pass Percentage</th>
+            <th scope="col">Fail Percentage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let service of services; index as index">
+            <td>{{index+1}}</td>
+            <td><a [routerLink]="['/project',service.name]">{{service.name}}</a></td>
+            <td>{{service.totalTests}}</td>
+            <td>{{service.totalPass}}</td>
+            <td>{{service.totalFail}}</td>
+            <td>{{service.totalSkipped}}</td>
+            <td>{{service.passPercentage}}</td>
+            <td>{{service.failPercentage}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>

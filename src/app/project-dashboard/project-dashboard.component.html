@@ -1,0 +1,47 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <div>
+    <div class="container">
+      <div class="col">
+          <h3>
+              
+          </h3>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="container">
+      <div class="alert alert-success" role="alert">
+          <b>{{projectName}} Stats:  </b>
+          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'total')"><u>Total Tests: {{testSummary.totalTests}},</u></a>  
+          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'passed')"><u>Pass: {{testSummary.totalPass}},</u></a>  
+          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'failed')"><u>Fail: {{testSummary.totalFail}},</u></a>  
+          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'skipped')"><u>Skipped: {{testSummary.totalSkipped}},</u></a>  
+          Pass Percentage: {{testSummary.passPercentage}}%,
+          Fail Percentage: {{testSummary.failPercentage}}%
+      </div>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Feature Name</th>
+          <th scope="col">TestName</th>
+          <th scope="col">Status</th>
+          <th scope="col">Error</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let test of teststats">
+          <td scope="row">{{test.index}}</td>
+          <td>{{test.fullClassName}}</td>
+          <td>{{test.name}}</td>
+          <td>{{test.status}}</td>
+          <td>{{test.failureMessage}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination>
+    </div>
+  </div>  
