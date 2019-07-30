@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  db:
+    build:
+      context: ./solr
+    ports:
+      - "8983"
+    entrypoint:
+      - docker-entrypoint.sh 
+      - solr-precreate
+      - gettingstarted
+      - /tmp/gettingstarted
+  app:
+    build:
+      context: .
+      dockerfile: DockerfileNginx
+    depends_on:
+      - db  
+    ports:
+      - "80:80"
