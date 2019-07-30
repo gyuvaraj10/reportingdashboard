@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  SOLRENDPOINT: "http://localhost:8984"
+  SOLRENDPOINT: "http://localhost:8983"
 };
 
 /*
