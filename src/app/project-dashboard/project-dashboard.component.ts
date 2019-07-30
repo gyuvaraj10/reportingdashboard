@@ -10,6 +10,15 @@ interface TestStat {
   failureMessage: string;
 }
 
+interface TestSummary {
+  totalTests: number;
+  totalPass: number;
+  totalFail: number;
+  totalSkipped: number;
+  passPercentage: string;
+  failPercentage: string;
+}
+
 @Component({
   selector: 'app-project-dashboard',
   templateUrl: './project-dashboard.component.html',
@@ -20,7 +29,7 @@ export class ProjectDashboardComponent implements OnInit {
   title = 'reporting';
   projectName = "";
   tests=[];
-  testSummary = {};
+  testSummary:TestSummary;
   page = 1;
   pageSize = 10;
   collectionSize = 0;
@@ -56,8 +65,8 @@ export class ProjectDashboardComponent implements OnInit {
         totalPass: 0,
         totalFail: 0,
         totalSkipped: 0,
-        passPercentage: 0,
-        failPercentage: 0
+        passPercentage: "0",
+        failPercentage: "0"
       }
       console.log(error);
     })
@@ -94,8 +103,8 @@ export class ProjectDashboardComponent implements OnInit {
   }
 
   getAlertStyle() {
-    var rate = this.testSummary['passPercentage'];
-    if(rate ==100) {
+    var rate = parseFloat(this.testSummary['passPercentage']);
+    if(rate == 100) {
       return "alert alert-success";
     } else if(rate <100 && rate >60) {
       return "alert alert-warning";
