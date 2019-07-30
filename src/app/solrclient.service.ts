@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, interval, timer } from 'rxjs';
 import { environment } from './../environments/environment';
-
+import {TestSummary} from './models/TestSummary';
+import {switchMap, map, flatMap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,12 +24,11 @@ export class SolrclientService {
   //facetUrl = "http://localhost:8983/solr/gettingstarted/select?q=*:*&facet=true&facet.field=servicename";
   
   getTestExecutionSumamry() {
-    return this.http.get(this.summaryOfTestExecutionResults_facet_pivot_url).toPromise();
+    return timer(1000, 60*1000).pipe(switchMap(()=> {
+      return this.http.get<TestSummary>(this.summaryOfTestExecutionResults_facet_pivot_url);
+    }))
+    
   }
-
-  // getData() {
-  //   return this.http.get(this.dataUrl).toPromise();
-  // }
 
   getStats(serviceName: string) {
     let url = this.baseUrl+"?q=servicename:"+serviceName+"&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=2000&indent=true";

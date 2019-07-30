@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SolrclientService } from '../solrclient.service';
 import { isFulfilled } from 'q';
-
+import {TestSummary} from '../models/TestSummary';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -15,7 +15,8 @@ export class DashboardComponent implements OnInit {
   constructor(private serviceClient: SolrclientService) { 
     var testSumamryPromise =  serviceClient.getTestExecutionSumamry();
     var isFulfilled = false;
-    testSumamryPromise.then(response => {
+    testSumamryPromise.subscribe(
+      (response: TestSummary) => {
       var pivot = response['facet_counts'].facet_pivot;
       var servicesStats = pivot['servicename,status'];
       servicesStats.forEach(serviceStats=> {
@@ -43,12 +44,9 @@ export class DashboardComponent implements OnInit {
           failPercentage: ((failedTests/totalTests)*100).toFixed(1)
         };
         this.services.push(testSummary);
-      })
-      }).catch(error => {
-      console.log(error);
-    }).finally(()=>{
-      isFulfilled = true;
-    });
+    });},
+      error => console.log(error)
+  );
     this.updateProgressBar();
   }
   private delay(ms: number) {
