@@ -7,11 +7,11 @@
             <th scope="col">#</th>
             <th scope="col">Service Name</th>
             <th scope="col">Total Tests</th>
-            <th scope="col">Total Pass</th>
-            <th scope="col">Total Fail</th>
-            <th scope="col">Total Skipped</th>
-            <th scope="col">Pass Percentage</th>
-            <th scope="col">Fail Percentage</th>
+            <th scope="col">Pass</th>
+            <th scope="col">Fail</th>
+            <th scope="col">Can't Run</th>
+            <!-- <th scope="col">Pass Percentage</th>
+            <th scope="col">Fail Percentage</th> -->
         </tr>
         </thead>
         <tbody>
@@ -19,13 +19,20 @@
             <td>{{index+1}}</td>
             <td><a [routerLink]="['/project',service.name]">{{service.name}}</a></td>
             <td><b>{{service.totalTests}}</b></td>
-            <td style="color: green;"><b>{{service.totalPass}}</b></td>
-            <td style="color: red;"><b>{{service.totalFail}}</b></td>
+            <td style="color: green;"><b>{{service.totalPass}}({{service.passPercentage}}%)</b></td>
+            <td style="color: red;"><b>{{service.totalFail}}({{service.failPercentage}}%)</b></td>
             <td style="color: orange;"><b>{{service.totalSkipped}}</b></td>
-            <td><b>{{service.passPercentage}}</b></td>
-            <td><b>{{service.failPercentage}}</b></td>
+            <!-- <td><b>{{service.passPercentage}}</b></td>
+            <td><b>{{service.failPercentage}}</b></td> -->
         </tr>
         </tbody>
     </table>
 </div>
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+            {{error}}
+      </div>
+    </div>
+  </div>
 </div>

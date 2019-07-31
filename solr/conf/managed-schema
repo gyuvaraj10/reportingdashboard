@@ -442,14 +442,11 @@
   <field name="_root_" type="string" docValues="false" indexed="true" stored="false"/>
   <field name="_text_" type="text_general" multiValued="true" indexed="true" stored="false"/>
   <field name="_version_" type="plong" indexed="false" stored="false"/>
-  <field name="className" type="text_en" uninvertible="true" indexed="true" stored="true"/>
   <field name="failed" type="boolean" uninvertible="true" indexed="true" stored="true"/>
-  <field name="failureDetail" type="text_en" uninvertible="true" indexed="true" stored="true"/>
   <field name="failureMessage" type="text_en" uninvertible="true" indexed="true" stored="true"/>
-  <field name="failureType" type="text_en" uninvertible="true" indexed="true" stored="true"/>
-  <field name="fullClassName" type="text_en_splitting" uninvertible="true" indexed="true" stored="true"/>
+  <field name="featureName" type="text_en" uninvertible="true" indexed="true" stored="true"/>
   <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
-  <field name="name" type="text_en" uninvertible="true" indexed="true" stored="true"/>
+  <field name="scenarioName" type="text_en" uninvertible="true" indexed="true" stored="true"/>
   <field name="passed" type="boolean" uninvertible="true" indexed="true" stored="true"/>
   <field name="serviceName" type="text_general"/>
   <field name="servicename" type="string" uninvertible="true" indexed="true" stored="true"/>

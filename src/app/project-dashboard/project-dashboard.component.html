@@ -23,8 +23,8 @@
       <tbody>
         <tr *ngFor="let test of teststats">
           <td scope="row">{{test.index}}</td>
-          <td>{{test.fullClassName}}</td>
-          <td>{{test.name}}</td>
+          <td>{{test.featureName}}</td>
+          <td>{{test.scenarioName}}</td>
           <td>{{test.status}}</td>
           <td>{{test.failureMessage}}</td>
         </tr>
@@ -34,4 +34,5 @@
         <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
         </ngb-pagination>
     </div>
-  </div>  
+  </div> 
+</div> 

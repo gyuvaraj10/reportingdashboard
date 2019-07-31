@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SolrclientService} from '../solrclient.service';
 import { ActivatedRoute } from '@angular/router';
+import {TestSummary} from '../models/TestSummary';
 
 interface TestStat {
   index?: number;
@@ -8,15 +9,6 @@ interface TestStat {
   name: string;
   status: string;
   failureMessage: string;
-}
-
-interface TestSummary {
-  totalTests: number;
-  totalPass: number;
-  totalFail: number;
-  totalSkipped: number;
-  passPercentage: string;
-  failPercentage: string;
 }
 
 @Component({
@@ -49,7 +41,7 @@ export class ProjectDashboardComponent implements OnInit {
         var skipped = docs.filter(x=>x.skipped);
         var totalPass = passCases.length;
         this.testSummary = {
-          totalTests:docs.length,
+          totalTests: docs.length,
           totalPass: totalPass,
           totalFail: (docs.length-(totalPass+skipped)),
           totalSkipped: skipped.length,
@@ -62,11 +54,11 @@ export class ProjectDashboardComponent implements OnInit {
     }).catch(error => {
       this.testSummary = {
         totalTests:0,
-        totalPass: 0,
-        totalFail: 0,
-        totalSkipped: 0,
-        passPercentage: "0",
-        failPercentage: "0"
+        totalPass:0,
+        totalFail:0,
+        totalSkipped:0,
+        passPercentage:"0",
+        failPercentage:"0"
       }
       console.log(error);
     })

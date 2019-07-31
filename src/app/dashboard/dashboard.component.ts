@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
       (response: TestSummary) => {
       var pivot = response['facet_counts'].facet_pivot;
       var servicesStats = pivot['servicename,status'];
+      this.services = [];
       servicesStats.forEach(serviceStats=> {
         var name = serviceStats.value;
         var totalTests = serviceStats.count;
@@ -44,8 +45,9 @@ export class DashboardComponent implements OnInit {
           failPercentage: ((failedTests/totalTests)*100).toFixed(1)
         };
         this.services.push(testSummary);
-    });},
-      error => console.log(error)
+    })
+  },
+   error => console.log(error)
   );
     this.updateProgressBar();
   }
