@@ -11,6 +11,7 @@ export class DashboardComponent implements OnInit {
   services = [];
   progress = 0;
   isFulfilled = false;
+  error;
 
   constructor(private serviceClient: SolrclientService) { 
     var testSumamryPromise =  serviceClient.getTestExecutionSumamry();
@@ -48,8 +49,10 @@ export class DashboardComponent implements OnInit {
           });
           this.isFulfilled = true;
     },
-   error => console.log(error),
-   () => { this.isFulfilled = true;}
+   (error) => {
+    console.log(error);
+    this.error = error;
+   }
   );
   this.updateProgressBar();
   }
