@@ -444,6 +444,7 @@
   <field name="_version_" type="plong" indexed="false" stored="false"/>
   <field name="failed" type="boolean" uninvertible="true" indexed="true" stored="true"/>
   <field name="failureMessage" type="text_en" uninvertible="true" indexed="true" stored="true"/>
+  <field name="shortErrorMessage" type="text_en" uninvertible="true" indexed="true" stored="true"/>
   <field name="featureName" type="text_en" uninvertible="true" indexed="true" stored="true"/>
   <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
   <field name="scenarioName" type="text_en" uninvertible="true" indexed="true" stored="true"/>
