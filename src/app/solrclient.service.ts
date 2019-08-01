@@ -11,13 +11,13 @@ export class SolrclientService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = "/solr/gettingstarted/select";
+  baseUrl = "http://localhost:8983/solr/gettingstarted/select";
   
-  statsUrl="/solr/gettingstarted/select?q=servicename:Match&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=200&indent=true";
+  statsUrl="http://localhost:8983/solr/gettingstarted/select?q=servicename:Match&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=200&indent=true";
   
-  summaryOfTestExecutionResults_facet_pivot_url="/solr/gettingstarted/select?q=servicename:*&facet=true&facet.field=servicename&facet.pivot=servicename,status&indent=true";
+  summaryOfTestExecutionResults_facet_pivot_url="http://localhost:8983/solr/gettingstarted/select?q=servicename:*&facet=true&facet.field=servicename&facet.pivot=servicename,status,tags&indent=true";
 
-  serviceTestStatsByStatus="/solr/gettingstarted/select?q=servicename:{%servicename}&fq=status:{%status}&rows=2000&indent=true";
+  serviceTestStatsByStatus="http://localhost:8983/solr/gettingstarted/select?q=servicename:{%servicename}&fq=status:{%status}&rows=2000&indent=true";
 
   //dataUrl = environment.SOLRENDPOINT+"/solr/gettingstarted/select?q=servicename%3AVerificationHistory&rows=100";
   //statsWithFacet="http://localhost:8983/solr/gettingstarted/select?q=servicename:Match&facet=true&facet.field=servicename&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=200&indent=true";
