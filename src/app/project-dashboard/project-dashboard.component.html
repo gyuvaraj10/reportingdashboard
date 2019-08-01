@@ -2,12 +2,12 @@
 <div style="text-align:center">
   <div class="container">
       <div class="alert alert-success" role="alert">
-          <b>{{projectName}} Stats:  </b>
-          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'total')"><u>Total Tests: {{testSummary.totalTests}},</u></a>  
-          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'passed')"><u>Pass: {{testSummary.totalPass}},</u></a>  
-          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'failed')"><u>Fail: {{testSummary.totalFail}},</u></a>  
-          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'skipped')"><u>Skipped: {{testSummary.totalSkipped}},</u></a>  
-          Pass Percentage: {{testSummary.passPercentage}}%,
+          <b>{{projectName}} Stats:&nbsp;</b>
+          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'total')" style="color: black"><b><u>Total Tests: {{testSummary.totalTests}}</u></b></a>&nbsp;  
+          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'passed')" style="color: green;"><b><u>Pass: {{testSummary.totalPass}}</u></b></a>&nbsp; 
+          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'failed')" style="color: red;"><b><u>Fail: {{testSummary.totalFail}}</u></b></a>&nbsp;  
+          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'skipped')" style="color: orange;"><b><u>Skipped: {{testSummary.totalSkipped}}</u></b></a>&nbsp;  
+          Pass Percentage: {{testSummary.passPercentage}}%,&nbsp;
           Fail Percentage: {{testSummary.failPercentage}}%
       </div>
     <table class="table table-bordered">
