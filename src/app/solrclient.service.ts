@@ -11,23 +11,27 @@ export class SolrclientService {
 
   constructor(private http: HttpClient) { }
 
-  baseUrl = "http://localhost:8983/solr/gettingstarted/select";
-  
-  statsUrl="http://localhost:8983/solr/gettingstarted/select?q=servicename:Match&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=200&indent=true";
-  
-  summaryOfTestExecutionResults_facet_pivot_url="http://localhost:8983/solr/gettingstarted/select?q=servicename:*&facet=true&facet.field=servicename&facet.pivot=servicename,status,tags&indent=true";
+  host= "http://localhost:8983";
 
-  serviceTestStatsByStatus="http://localhost:8983/solr/gettingstarted/select?q=servicename:{%servicename}&fq=status:{%status}&rows=2000&indent=true";
+  baseUrl = this.host+"/solr/gettingstarted/select";
+  
+  statsUrl=this.host+"/solr/gettingstarted/select?q=servicename:Match&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=200&indent=true";
+  
+  summaryOfTestExecutionResults_facet_pivot_url=this.host+"/solr/gettingstarted/select?q=servicename:*&facet=true&facet.field=servicename&facet.pivot=servicename,buildNumber,status,tags&indent=true";
+  testSummaryByService_facet_pivot_url=this.host+"/solr/gettingstarted/select?q=servicename:{servicename}&facet=true&facet.field=servicename&facet.pivot=servicename,buildNumber,status,tags&indent=true&rows=0";
 
-  //dataUrl = environment.SOLRENDPOINT+"/solr/gettingstarted/select?q=servicename%3AVerificationHistory&rows=100";
-  //statsWithFacet="http://localhost:8983/solr/gettingstarted/select?q=servicename:Match&facet=true&facet.field=servicename&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=200&indent=true";
-  //facetUrl = "http://localhost:8983/solr/gettingstarted/select?q=*:*&facet=true&facet.field=servicename";
+  serviceTestStatsByStatus=this.host+ "/solr/gettingstarted/select?q=servicename:{servicename}&fq=status:{%status}&rows=2000&indent=true";
+
+  // summary = "http://localhost:8983/solr/gettingstarted/select?q=servicename:*&facet=true&facet.field=servicename&facet.pivot=servicename,status,timeStamp&indent=true";
   
   getTestExecutionSumamry() {
     return timer(1000, 60*1000).pipe(switchMap(()=> {
       return this.http.get<TestSummary>(this.summaryOfTestExecutionResults_facet_pivot_url);
-    }))
-    
+    })) 
+  }
+
+  getTestExecutionSumamryByService(serviceName: string) {
+      return this.http.get<TestSummary>(this.testSummaryByService_facet_pivot_url.replace("{servicename}", serviceName)).toPromise();
   }
 
   getStats(serviceName: string) {

@@ -5,4 +5,6 @@ export interface TestSummary {
     totalSkipped: number;
     passPercentage: string;
     failPercentage: string;
+    buildNumber: string;
+    timeStamp: Date;
   }  

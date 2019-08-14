@@ -26,12 +26,20 @@ export class ProjectDashboardComponent implements OnInit {
   pageSize = 10;
   collectionSize = 0;
   progress=100;
-  
+
   constructor(private solrClient: SolrclientService, private route: ActivatedRoute) {   }
   
   ngOnInit() {
     let name = this.route.snapshot.paramMap.get('name')
     this.projectName = name;
+    this.updateTestSummary(name);
+  }
+ 
+  /**
+  * udpates the test summary for a service
+  * @param name nameof the service
+  */
+  updateTestSummary(name: string) {
     this.solrClient.getStats(name)
     .then(resp => {
       if(resp && resp['response']) {
@@ -46,7 +54,9 @@ export class ProjectDashboardComponent implements OnInit {
           totalFail: (docs.length-(totalPass+skipped)),
           totalSkipped: skipped.length,
           passPercentage: ((totalPass/docs.length)*100).toFixed(1),
-          failPercentage: (((docs.length-(totalPass+skipped))/docs.length)*100).toFixed(1)
+          failPercentage: (((docs.length-(totalPass+skipped))/docs.length)*100).toFixed(1),
+          buildNumber: "",
+          timeStamp: null
         }
         this.collectionSize = this.tests.length;
       }
@@ -58,14 +68,14 @@ export class ProjectDashboardComponent implements OnInit {
         totalFail:0,
         totalSkipped:0,
         passPercentage:"0",
-        failPercentage:"0"
+        failPercentage:"0",
+        buildNumber: "",
+        timeStamp: null
       }
       console.log(error);
     })
   }
- 
   getTestStatsUrlByServiceAndStatus(serviceName, status) {
-    console.log(status);
     if(status=='total') {
       this.solrClient.getStats(serviceName).then(resp => {
         if(resp && resp['response']) {
@@ -105,4 +115,7 @@ export class ProjectDashboardComponent implements OnInit {
     }
   }
 
+  onKey(value: string) {
+    this.updateTestSummary(value);
+  }
 }
