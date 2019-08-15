@@ -8,7 +8,7 @@ import { BarChartComponent } from './bar-chart/bar-chart.component';
 
 const routes: Routes = [
   {
-    path: 'project/:name', 
+    path: 'project/:name/:buildNumber', 
     component: ProjectDashboardComponent
   },
   {

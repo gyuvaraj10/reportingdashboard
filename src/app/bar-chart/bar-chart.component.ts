@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SolrclientService } from '../solrclient.service';
 import {TestSummary} from '../models/TestSummary';
+import { keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-bar-chart',
@@ -11,7 +12,7 @@ import {TestSummary} from '../models/TestSummary';
 export class BarChartComponent implements OnInit {
 
   private solrClient: SolrclientService;
-  view: any[] = [700, 400];
+  view: any[] = [500, 200];
 
   // options
   showXAxis = true;
@@ -26,6 +27,11 @@ export class BarChartComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
   totalSummary= [];
+  
+  @Input() buildNumber;
+  data;
+  summary;
+
   constructor(solrClient: SolrclientService) { 
     this.solrClient = solrClient;
   }
@@ -56,6 +62,11 @@ export class BarChartComponent implements OnInit {
       }
       var summary = new Map([...stats.entries()].sort());
       this.single = this.formData(summary)
+      summary.forEach((value, key, summary) => {
+        if(key === this.buildNumber) {
+          this.data = value;
+        }
+      })
     }).catch((error)=> {
       console.log(error)
     });

@@ -100,7 +100,7 @@ export class ReportsComponent implements OnInit {
 
   constructor(private serviceClient: SolrclientService) { 
     var testSumamryPromise =  serviceClient.getTestExecutionSumamryByService("VerifyDocument");
-    testSumamryPromise.subscribe(
+    testSumamryPromise.then(
       (response: TestSummary) => {
             var pivot = response['facet_counts'].facet_pivot;
             var servicesStats = pivot['servicename,buildNumber,status,tags'];
