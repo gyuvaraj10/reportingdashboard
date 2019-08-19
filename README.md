@@ -28,3 +28,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 To Deploy the app using the docker compose. Just run the 
 docker-compose -f docker-compose1.yml up --build
+
+Features to Cover:
+1. Use TTL (Time-to-Live) feature to auto purge solr documents.
+_ttl_ = Amout of time this document shuold be kept(e.g. +10DAYS)
+expire_at=The calcuated expiration date (INDEX_TIME+_ttl_)

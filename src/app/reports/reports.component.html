@@ -1,0 +1,37 @@
+<div class="container">
+        <app-bar-chart></app-bar-chart>
+    <div class="row">
+        <div class="col-sm">
+            <div>
+                <div>
+                    <div style="display: block;">
+                    <canvas baseChart width="400" height="400"
+                                [datasets]="lineChartData"
+                                [labels]="lineChartLabels"
+                                [options]="lineChartOptions"
+                                [colors]="lineChartColors"
+                                [legend]="lineChartLegend"
+                                [chartType]="lineChartType"
+                                [plugins]="lineChartPlugins"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-sm">
+                <ngx-charts-bar-vertical
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="single"
+                    [gradient]="gradient"
+                    [xAxis]="showXAxis"
+                    [yAxis]="showYAxis"
+                    [legend]="showLegend"
+                    [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel"
+                    [yAxisLabel]="yAxisLabel"
+                    (select)="onSelect($event)">
+              </ngx-charts-bar-vertical>
+        </div> -->
+    </div>
+</div>

@@ -5,3 +5,14 @@ table {
 .table td {
     text-align: start;
 }
+.success {
+    color: green;
+}
+
+.failed {
+    color: red;
+}
+
+.skipped {
+    color: orange;
+}
