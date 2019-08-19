@@ -3,6 +3,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SolrclientService } from '../solrclient.service';
 import {TestSummary} from '../models/TestSummary';
 import { keyframes } from '@angular/animations';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-bar-chart',
@@ -12,6 +13,7 @@ import { keyframes } from '@angular/animations';
 export class BarChartComponent implements OnInit {
 
   private solrClient: SolrclientService;
+  
   view: any[] = [500, 200];
 
   // options
@@ -34,7 +36,7 @@ export class BarChartComponent implements OnInit {
   data;
   summary;
 
-  constructor(solrClient: SolrclientService) { 
+  constructor(solrClient: SolrclientService, private router: Router) { 
     this.solrClient = solrClient;
   }
 
@@ -75,8 +77,11 @@ export class BarChartComponent implements OnInit {
   }
 
   onSelect(event) {
-    console.log(event);
+    this.router.navigateByUrl("/project/"+this.serviceName+ '/'+event.series).then(()=> {
+      window.location.reload();
+    })
   }
+  
   private formData(stats: Map<any, any>) {
     var items =  []
     stats.forEach((value, key, map) => {
