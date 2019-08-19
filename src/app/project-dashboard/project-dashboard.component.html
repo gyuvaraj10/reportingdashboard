@@ -29,7 +29,7 @@
               <td>{{test.featureName}}</td>
               <td>{{test.scenarioName}}</td>
               <td [ngClass]="{'success': test.status == 'passed', 'failed': test.status == 'failed'}" title="{{test.failureMessage}}"><b>{{test.status}}</b></td>
-              <td title="{{test.failureMessage}}">{{test.shortErrorMessage}}</td>
+              <td title="{{test.failureMessage}}" data-toggle="modal" data-target="#errorMoreLikeThisModal">{{test.shortErrorMessage}}</td>
             </tr>
           </tbody>
         </table>
@@ -37,4 +37,23 @@
             <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
         </div>
   </div>
+  <div class="modal fade" id="errorMoreLikeThisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="errorMoreLikeThisModal">Find Similar Tests Failed due to the same reason</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Do you want to find the tests that were failed due to the same reason?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Find</button>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
