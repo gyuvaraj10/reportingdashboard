@@ -1,37 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-    <app-bar-chart [buildNumber]="buildNumber"></app-bar-chart>
-  <!-- <div class="row">
-    <div class="col">
-      <app-bar-chart></app-bar-chart>
-      <app-pie-chart></app-pie-chart>
-    </div>
-  </div> -->
-  <!-- <div class="row">
-      <div class="alert alert-success" role="alert">
-          <b>{{projectName}} Stats:&nbsp;</b>
-          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'total')" style="color: black"><b><u>Total Tests: {{testSummary.totalTests}}</u></b></a>&nbsp;  
-          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'passed')" style="color: green;"><b><u>Pass: {{testSummary.totalPass}}</u></b></a>&nbsp; 
-          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'failed')" style="color: red;"><b><u>Fail: {{testSummary.totalFail}}</u></b></a>&nbsp;  
-          <a (click)="getTestStatsUrlByServiceAndStatus(projectName, 'skipped')" style="color: orange;"><b><u>Skipped: {{testSummary.totalSkipped}}</u></b></a>&nbsp;  
-          Pass Percentage: {{testSummary.passPercentage}}%,&nbsp;
-          Fail Percentage: {{testSummary.failPercentage}}%
-      </div>
-      <div class="input-group input-group-sm mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-sm"><b>Search the tests</b></span>
-        </div>
-        <input type="text" #searchString class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
-        <button type="button" class="btn btn-info" (click)="onKey(searchString.value)">View Results</button>
-      </div>
-  </div> -->
+  <app-bar-chart [buildNumber]="buildNumber" [serviceName]="projectName"></app-bar-chart>
   <div class="row">
-      <table class="table table-bordered">
-          <thead class="thead-dark">
+      <table class="table table-bordered table-striped">
+          <thead>
             <tr>
               <th scope="col-sm">#</th>
               <th scope="col-lg">Feature Name</th>
-              <th scope="col-lg">TestName</th>
+              <th scope="col-lg">Scenario Name</th>
               <th scope="col-sm">Status</th>
               <th scope="col-lg">Error</th>
             </tr>
@@ -39,27 +15,26 @@
           <tbody>
             <tr>
               <td></td>
-              <td><input type="text"></td>
-              <td> <input type="text" #testName (keyup.enter)="getTestStatsByServiceAndScenario(projectName, testName.value)"></td>
+              <td></td>
+              <td><input class="form-control" type="text" placeholder="search" #testName (keyup.enter)="getTestStatsByServiceAndScenario(projectName, testName.value)"></td>
               <td>
-                  <input type="text" #status (keyup.enter)="getTestStatsUrlByServiceAndStatus(projectName, status.value)">
+                  <input class="form-control" type="text" placeholder="search" #status (keyup.enter)="getTestStatsUrlByServiceAndStatus(projectName, status.value)">
               </td>
               <td>
-                  <!-- <input type="text" #status (keyup.enter)="getTestStatsUrlByServiceAndStatus(projectName, status.value)"> -->
+                  <input class="form-control" type="text" placeholder="search" #error (keyup.enter)="getTestStatsByServiceAndError(projectName, error.value)">
               </td>
             </tr>
             <tr *ngFor="let test of teststats">
-              <td scope="row">{{test.index}}</td>
+              <td scope="row"><b>{{test.index}}</b></td>
               <td>{{test.featureName}}</td>
               <td>{{test.scenarioName}}</td>
-              <td>{{test.status}}</td>
-              <td>{{test.failureMessage}}</td>
+              <td [ngClass]="{'success': test.status == 'passed', 'failed': test.status == 'failed'}" title="{{test.failureMessage}}"><b>{{test.status}}</b></td>
+              <td title="{{test.failureMessage}}">{{test.shortErrorMessage}}</td>
             </tr>
           </tbody>
         </table>
         <div class="d-flex justify-content-between p-2">
-            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
-            </ngb-pagination>
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
         </div>
   </div>
 </div>

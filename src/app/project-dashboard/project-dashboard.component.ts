@@ -79,19 +79,10 @@ export class ProjectDashboardComponent implements OnInit {
     })
   }
   getTestStatsByServiceAndScenario(serviceName, scenarioName) {
-    this.solrClient.getStatsByTestName(serviceName, scenarioName,this.buildNumber).then(resp => {
-      if(resp && resp['response']) {
-        var docs = resp['response'].docs;
-        this.tests = docs;
-        this.collectionSize = this.tests.length;
-      }
-    }).catch(error => {
-      console.log(error);
-    })
-  }
-  getTestStatsUrlByServiceAndStatus(serviceName, status) {
-    if(status=='total'|| status== '' || !status) {
-      this.solrClient.getStats(serviceName, this.buildNumber).then(resp => {
+    if(scenarioName === ''|| !scenarioName) {
+      this.updateTestSummary(serviceName, this.buildNumber);
+    } else {
+      this.solrClient.getStatsByTestName(serviceName, scenarioName,this.buildNumber).then(resp => {
         if(resp && resp['response']) {
           var docs = resp['response'].docs;
           this.tests = docs;
@@ -100,6 +91,28 @@ export class ProjectDashboardComponent implements OnInit {
       }).catch(error => {
         console.log(error);
       })
+    }
+  }
+
+  getTestStatsByServiceAndError(serviceName, errorString) {
+    if(errorString === ''|| !errorString) {
+      this.updateTestSummary(serviceName, this.buildNumber);
+    } else {
+      this.solrClient.getStatsByError(serviceName, errorString,this.buildNumber).then(resp => {
+        if(resp && resp['response']) {
+          var docs = resp['response'].docs;
+          this.tests = docs;
+          this.collectionSize = this.tests.length;
+        }
+      }).catch(error => {
+        console.log(error);
+      })
+    }
+  }
+
+  getTestStatsUrlByServiceAndStatus(serviceName, status) {
+    if(status === ''|| !status) {
+      this.updateTestSummary(serviceName, this.buildNumber);
     } else {
       this.solrClient.getTestStatsUrlByServiceAndStatus(serviceName, status, this.buildNumber).then(resp => {
         if(resp && resp['response']) {

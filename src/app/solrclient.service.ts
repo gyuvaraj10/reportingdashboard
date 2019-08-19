@@ -17,10 +17,10 @@ export class SolrclientService {
   
   statsUrl=this.host+"/solr/gettingstarted/select?q=servicename:Match&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=200&indent=true";
   
-  summaryOfTestExecutionResults_facet_pivot_url=this.host+"/solr/gettingstarted/select?q=servicename:*&facet=true&facet.field=servicename&facet.pivot=servicename,buildNumber,status,tags&indent=true";
+  summaryOfTestExecutionResults_facet_pivot_url=this.host+"/solr/gettingstarted/select?q=servicename:*&facet=true&facet.field=servicename&facet.pivot=servicename,buildNumber,status,tags&indent=true&rows=0";
   testSummaryByService_facet_pivot_url=this.host+"/solr/gettingstarted/select?q=servicename:{servicename}&facet=true&facet.field=servicename&facet.pivot=servicename,buildNumber,status,tags&indent=true&rows=0";
 
-  serviceTestStatsByStatus=this.host+ "/solr/gettingstarted/select?q=servicename:{servicename}&fq=buildNumber:{%build}&fq=status:{%status}&rows=2000&indent=true";
+  serviceTestStatsByStatus=this.host+ "/solr/gettingstarted/select?q=servicename:{servicename}&fq=buildNumber:{%build}&fq=status:{%status}&rows=20000&indent=true";
   
   getTestExecutionSumamry() {
     return timer(1000, 60*1000).pipe(switchMap(()=> {
@@ -40,6 +40,11 @@ export class SolrclientService {
     let url = this.baseUrl+"?q=servicename:"+serviceName+"&fq=buildNumber:"+buildNumber+"&fq=scenarioName:"+testName+"&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=2000&indent=true";
     return this.http.get(url).toPromise();
   }
+  getStatsByError(serviceName: string, errorString: string, buildNumber: string) {
+    let url = this.baseUrl+"?q=servicename:"+serviceName+"&fq=buildNumber:"+buildNumber+"&fq=failureMessage:"+errorString+"&stats=true&stats.field={!func}termfreq(%27status%27,%20%27passed%27)&stats.field={!func}termfreq(%27status%27,%27failed%27)&stats.field={!func}termfreq(%27status%27,%27skipped%27)&rows=2000&indent=true";
+    return this.http.get(url).toPromise();
+  }
+  
 
   getTestStatsUrlByServiceAndStatus(servicename: string, status: string, buildNumber: string) {
     let url = this.serviceTestStatsByStatus.replace("{servicename}", servicename).replace("{%status}", status).replace("{%build}", buildNumber);

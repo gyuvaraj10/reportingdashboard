@@ -29,6 +29,8 @@ export class BarChartComponent implements OnInit {
   totalSummary= [];
   
   @Input() buildNumber;
+  @Input() serviceName;
+
   data;
   summary;
 
@@ -38,7 +40,7 @@ export class BarChartComponent implements OnInit {
 
   ngOnInit() {
     var stats = new Map();
-    this.solrClient.getTestExecutionSumamryByService("VerifyDocument").then((response)=> {
+    this.solrClient.getTestExecutionSumamryByService(this.serviceName).then((response)=> {
       var pivot = response['facet_counts'].facet_pivot;
       var servicesStats = pivot['servicename,buildNumber,status,tags'];
       var serviceStats = servicesStats[0];
