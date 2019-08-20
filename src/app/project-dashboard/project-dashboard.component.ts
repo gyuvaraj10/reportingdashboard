@@ -28,7 +28,7 @@ export class ProjectDashboardComponent implements OnInit {
   collectionSize = 0;
   progress=100;
   @Output() scenarioChange = new EventEmitter();
-  scenario: string;
+  scenario = {scenario: ''}; //intial value
 
   constructor(private solrClient: SolrclientService, private route: ActivatedRoute) {   }
   
@@ -148,7 +148,8 @@ export class ProjectDashboardComponent implements OnInit {
     this.updateTestSummary(value, this.buildNumber);
   }
   
-  assignScenarioToDisplay(scenarioToDisplay: string) {
+  assignScenarioToDisplay(scenarioToDisplay) {
+    console.log(scenarioToDisplay);
     this.scenario = scenarioToDisplay;
     this.scenarioChange.emit(this.scenario);
   }

@@ -27,9 +27,9 @@
             <tr *ngFor="let test of teststats">
               <td scope="row"><b>{{test.index}}</b></td>
               <td>{{test.featureName}}</td>
-              <td (click)="assignScenarioToDisplay(test.scenario)">{{test.scenarioName}}</td>
+              <td  data-toggle="modal" data-target="#errorMoreLikeThisModal" (click)="assignScenarioToDisplay(test)">{{test.scenarioName}}</td>
               <td [ngClass]="{'success': test.status == 'passed', 'failed': test.status == 'failed'}" title="{{test.failureMessage}}"><b>{{test.status}}</b></td>
-              <td title="{{test.failureMessage}}" data-toggle="modal" data-target="#errorMoreLikeThisModal">{{test.shortErrorMessage}}</td>
+              <td title="{{test.failureMessage}}">{{test.shortErrorMessage}}</td>
             </tr>
           </tbody>
         </table>
@@ -47,7 +47,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>{{scenario}}</p>
+            <p>{{scenario.scenario}}</p>
           </div>
         </div>
       </div>
