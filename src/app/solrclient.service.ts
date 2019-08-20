@@ -22,6 +22,8 @@ export class SolrclientService {
 
   serviceTestStatsByStatus=this.host+ "/solr/gettingstarted/select?q=servicename:{servicename}&fq=buildNumber:{%build}&fq=status:{%status}&rows=20000&indent=true";
   
+  moreLikeThis = this.host+"/solr/gettingstarted/select?q=servicename:*&&qf=failureMessage:{message}&mlt.fl=failureMessage&mlt=true&mlt.match.include=true&mlt.count=1000&mlt.mintf=1";
+
   getTestExecutionSumamry() {
     return timer(1000, 60*1000).pipe(switchMap(()=> {
       return this.http.get<TestSummary>(this.summaryOfTestExecutionResults_facet_pivot_url);
@@ -45,9 +47,13 @@ export class SolrclientService {
     return this.http.get(url).toPromise();
   }
   
-
   getTestStatsUrlByServiceAndStatus(servicename: string, status: string, buildNumber: string) {
     let url = this.serviceTestStatsByStatus.replace("{servicename}", servicename).replace("{%status}", status).replace("{%build}", buildNumber);
+    return this.http.get(url).toPromise();
+  }
+
+  getSimilarTests(errorMessage: string) {
+    let url = this.moreLikeThis.replace("{message}", errorMessage);
     return this.http.get(url).toPromise();
   }
 }

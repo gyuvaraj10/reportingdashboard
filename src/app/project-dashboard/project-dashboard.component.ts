@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {SolrclientService} from '../solrclient.service';
 import { ActivatedRoute } from '@angular/router';
 import {TestSummary} from '../models/TestSummary';
@@ -27,7 +27,9 @@ export class ProjectDashboardComponent implements OnInit {
   pageSize = 10;
   collectionSize = 0;
   progress=100;
- 
+  @Output() scenarioChange = new EventEmitter();
+  scenario = {scenario: ''}; //intial value
+
   constructor(private solrClient: SolrclientService, private route: ActivatedRoute) {   }
   
   ngOnInit() {
@@ -144,5 +146,11 @@ export class ProjectDashboardComponent implements OnInit {
 
   onKey(value: string) {
     this.updateTestSummary(value, this.buildNumber);
+  }
+  
+  assignScenarioToDisplay(scenarioToDisplay) {
+    console.log(scenarioToDisplay);
+    this.scenario = scenarioToDisplay;
+    this.scenarioChange.emit(this.scenario);
   }
 }

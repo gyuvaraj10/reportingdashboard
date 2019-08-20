@@ -27,7 +27,7 @@
             <tr *ngFor="let test of teststats">
               <td scope="row"><b>{{test.index}}</b></td>
               <td>{{test.featureName}}</td>
-              <td>{{test.scenarioName}}</td>
+              <td  data-toggle="modal" data-target="#errorMoreLikeThisModal" (click)="assignScenarioToDisplay(test)">{{test.scenarioName}}</td>
               <td [ngClass]="{'success': test.status == 'passed', 'failed': test.status == 'failed'}" title="{{test.failureMessage}}"><b>{{test.status}}</b></td>
               <td title="{{test.failureMessage}}">{{test.shortErrorMessage}}</td>
             </tr>
@@ -37,4 +37,20 @@
             <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [maxSize]="10" [rotate]="true" [ellipses]="false" [boundaryLinks]="true"></ngb-pagination>
         </div>
   </div>
+  <div class="modal fade" id="errorMoreLikeThisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="errorMoreLikeThisModal">Scenario Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>{{scenario.scenario}}</p>
+            <p *ngIf="scenario.status=='failed'"><b>Error: </b>{{scenario.failureMessage}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
