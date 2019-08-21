@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-  <div class="alert alert-success" role="alert">
+  <div class="alert alert-success" role="alert" *ngIf="totalExecutionTime">
       <b>The Total Execution Time for build {{buildNumber}} is {{totalExecutionTime/60}} minutes</b>
   </div>
   <app-bar-chart [buildNumber]="buildNumber" [serviceName]="projectName"></app-bar-chart>
