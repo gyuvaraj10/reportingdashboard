@@ -1,17 +1,18 @@
+<!-- <div *ngIf="progress >= 100">
+     <button type="button" class="btn btn-warning" (click)="generatePDFReport()"></button>
+   
+</div> -->
 <div class="container">
     <div class="row">
         <div *ngIf="progress <100">
                 <ngb-progressbar type="info" [value]="progress">Loading Data</ngb-progressbar>
                 <br/>
         </div>
-        <div *ngIf="progress >= 100">
-            <button type="button" class="btn btn-warning" (click)="generatePDFReport()">Generate PDF</button>
-        </div>
         <table class="table table-bordered table-striped" id="contentToConvert" *ngIf="isFulfilled && services.length > 0">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Service Name </th>
+                <th scope="col">Service Name  <a class="badge badge-warning" (click)="generatePDFReport()">Generate PDF</a></th>
                 <th scope="col">Total Tests</th>
                 <th scope="col">Pass</th>
                 <th scope="col">Fail</th>
