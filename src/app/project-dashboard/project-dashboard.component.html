@@ -1,7 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
   <div class="alert alert-success" role="alert" *ngIf="totalExecutionTime">
-      <b>The Total Execution Time for build {{buildNumber}} is {{totalExecutionTime/60}} minutes</b>
+      <b>The Total Execution Time for build {{buildNumber}} is {{totalExecutionTime/60|number}} minutes</b>
   </div>
   <app-bar-chart [buildNumber]="buildNumber" [serviceName]="projectName"></app-bar-chart>
   <div class="row">
@@ -13,7 +13,7 @@
               <th scope="col-lg">Scenario Name</th>
               <th scope="col-sm">Status</th>
               <th scope="col-lg">Error</th>
-              <th scope="col-sm">Execution Time(sec)</th>
+              <th scope="col-sm">Time(sec)</th>
             </tr>
           </thead>
           <tbody>
@@ -33,7 +33,7 @@
               <td scope="row"><b>{{test.index}}</b></td>
               <td>{{test.featureName}}</td>
               <td  data-toggle="modal" data-target="#errorMoreLikeThisModal" (click)="assignScenarioToDisplay(test)">{{test.scenarioName}}</td>
-              <td [ngClass]="{'success': test.status == 'passed', 'failed': test.status == 'failed'}" title="{{test.failureMessage}}"><b>{{test.status}}</b></td>
+              <td [ngClass]="{'success': test.status == 'passed', 'failed': test.status == 'failed', 'skipped': test.status==='skipped'}" title="{{test.failureMessage}}"><b>{{test.status}}</b></td>
               <td title="{{test.failureMessage}}">{{test.shortErrorMessage}}</td>
               <td>{{test.executionTime}}</td>
             </tr>
