@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SolrclientService } from '../solrclient.service';
 import {TestSummary} from '../models/TestSummary';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,8 +16,43 @@ export class DashboardComponent implements OnInit {
   isFulfilled = false;
   error;
 
-  constructor(private serviceClient: SolrclientService) { 
-    var testSumamryPromise =  serviceClient.getTestExecutionSumamry();
+  constructor(private serviceClient: SolrclientService) { }
+
+  private delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  private async updateProgressBar() {
+    if(this.isFulfilled) {
+      this.progress = 100;
+    } else {
+      while (!this.isFulfilled) {
+        console.log(this.isFulfilled);
+        this.progress = this.progress+10;
+        await this.delay(100);
+      }
+    }
+  }
+
+  generatePDFReport() {
+    var data = document.getElementById('contentToConvert');  
+    html2canvas(data).then(canvas => {  
+      // Few necessary setting options  
+      var imgWidth = 210;   
+      var pageHeight = 295;    
+      var imgHeight = canvas.height * imgWidth / canvas.width;  
+      var heightLeft = imgHeight;  
+  
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      var position = 0;  
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+      pdf.save('ReportSummary.pdf'); // Generated PDF   
+    });  
+  }
+
+  ngOnInit() {
+    var testSumamryPromise =  this.serviceClient.getTestExecutionSumamry();
     this.isFulfilled = false;
     testSumamryPromise.subscribe(
       (response: TestSummary) => {
@@ -72,24 +109,6 @@ export class DashboardComponent implements OnInit {
    }
   );
   this.updateProgressBar();
-  }
-  private delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  private async updateProgressBar() {
-    if(this.isFulfilled) {
-      this.progress = 100;
-    } else {
-      while (!this.isFulfilled) {
-        console.log(this.isFulfilled);
-        this.progress = this.progress+10;
-        await this.delay(100);
-      }
-    }
-  }
-
-  ngOnInit() {
   }
   
 }

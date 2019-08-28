@@ -29,6 +29,7 @@ export class ProjectDashboardComponent implements OnInit {
   progress=100;
   @Output() scenarioChange = new EventEmitter();
   scenario = {scenario: ''}; //intial value
+  totalExecutionTime=0;
 
   constructor(private solrClient: SolrclientService, private route: ActivatedRoute) {   }
   
@@ -37,7 +38,7 @@ export class ProjectDashboardComponent implements OnInit {
     let buildNumber = this.route.snapshot.paramMap.get("buildNumber")
     this.buildNumber = buildNumber;
     this.projectName = name;
-    this.updateTestSummary(name, this.buildNumber);
+    this.updateTestSummary(name, this.buildNumber)
   }
  
   /**
@@ -50,6 +51,7 @@ export class ProjectDashboardComponent implements OnInit {
       if(resp && resp['response']) {
         var docs = resp['response'].docs;
         this.tests = docs;
+        this.tests.forEach((test)=> this.totalExecutionTime =  this.totalExecutionTime + parseFloat(test.executionTime))
         var passCases = docs.filter(x=> x.passed);
         var skipped = docs.filter(x=>x.skipped);
         var totalPass = passCases.length;
@@ -65,7 +67,6 @@ export class ProjectDashboardComponent implements OnInit {
         }
         this.collectionSize = this.tests.length;
       }
-      
     }).catch(error => {
       this.testSummary = {
         totalTests:0,
