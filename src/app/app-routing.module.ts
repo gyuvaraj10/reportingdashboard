@@ -5,11 +5,16 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportsComponent } from './reports/reports.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { BusinessUnitsComponent } from './business-units/business-units.component';
 
 const routes: Routes = [
   {
     path: 'project/:name/:buildNumber', 
     component: ProjectDashboardComponent
+  },
+  {
+    path: 'home',
+    component: BusinessUnitsComponent
   },
   {
     path: 'dashboard',

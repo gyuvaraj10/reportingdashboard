@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import {SolrclientService} from '../solrclient.service';
 import { ActivatedRoute } from '@angular/router';
 import {TestSummary} from '../models/TestSummary';
@@ -27,6 +27,7 @@ export class ProjectDashboardComponent implements OnInit {
   pageSize = 10;
   collectionSize = 0;
   progress=100;
+
   @Output() scenarioChange = new EventEmitter();
   scenario = {scenario: ''}; //intial value
   totalExecutionTime=0;
@@ -82,6 +83,7 @@ export class ProjectDashboardComponent implements OnInit {
     })
   }
   getTestStatsByServiceAndScenario(serviceName, scenarioName) {
+    scenarioName = scenarioName.toLowerCase();
     if(scenarioName === ''|| !scenarioName) {
       this.updateTestSummary(serviceName, this.buildNumber);
     } else {
@@ -98,22 +100,25 @@ export class ProjectDashboardComponent implements OnInit {
   }
 
   getTestStatsByServiceAndError(serviceName, errorString) {
-    if(errorString === ''|| !errorString) {
-      this.updateTestSummary(serviceName, this.buildNumber);
-    } else {
-      this.solrClient.getStatsByError(serviceName, errorString,this.buildNumber).then(resp => {
-        if(resp && resp['response']) {
-          var docs = resp['response'].docs;
-          this.tests = docs;
-          this.collectionSize = this.tests.length;
-        }
-      }).catch(error => {
-        console.log(error);
-      })
-    }
+    
+   
+      if(errorString === ''|| !errorString) {
+        this.updateTestSummary(serviceName, this.buildNumber);
+      } else {
+        this.solrClient.getStatsByError(serviceName, errorString,this.buildNumber).then(resp => {
+          if(resp && resp['response']) {
+            var docs = resp['response'].docs;
+            this.tests = docs;
+            this.collectionSize = this.tests.length;
+          }
+        }).catch(error => {
+          console.log(error);
+        })
+      }
   }
 
   getTestStatsUrlByServiceAndStatus(serviceName, status) {
+    status = status.toLowerCase()
     if(status === ''|| !status) {
       this.updateTestSummary(serviceName, this.buildNumber);
     } else {
@@ -128,6 +133,7 @@ export class ProjectDashboardComponent implements OnInit {
       })
     }
   }
+  
   get teststats(): TestStat[] {
     var teststats= this.tests.map((stat, i) => ({index: i + 1, ...stat}))
     .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);

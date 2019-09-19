@@ -12,7 +12,9 @@ import { ReportsComponent } from './reports/reports.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
-import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { FormsModule } from '@angular/forms';
+import { BusinessUnitsComponent } from './business-units/business-units.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +22,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     DashboardComponent,
     ReportsComponent,
     BarChartComponent,
-    PieChartComponent
+    BusinessUnitsComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,8 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     NgxChartsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,12 +20,12 @@
             <tr>
               <td></td>
               <td></td>
-              <td><input class="form-control" type="text" placeholder="search" #testName (keyup.enter)="getTestStatsByServiceAndScenario(projectName, testName.value)"></td>
+              <td><input class="form-control" type="text" placeholder="search" #testName (keyup)="getTestStatsByServiceAndScenario(projectName, testName.value)"></td>
               <td>
-                  <input class="form-control" type="text" placeholder="search" #status (keyup.enter)="getTestStatsUrlByServiceAndStatus(projectName, status.value)">
+                  <input class="form-control" type="text" placeholder="" class="form-control" required pattern="(passed)" #status (keyup)="getTestStatsUrlByServiceAndStatus(projectName, status.value)">
               </td>
               <td>
-                  <input class="form-control" type="text" placeholder="search" #error (keyup.enter)="getTestStatsByServiceAndError(projectName, error.value)">
+                  <input class="form-control" type="text" placeholder="search" #error (keyup)="getTestStatsByServiceAndError(projectName, error.value)">
               </td>
               <td></td>
             </tr>

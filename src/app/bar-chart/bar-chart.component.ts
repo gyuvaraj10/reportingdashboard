@@ -77,9 +77,21 @@ export class BarChartComponent implements OnInit {
   }
 
   onSelect(event) {
-    this.router.navigateByUrl("/project/"+this.serviceName+ '/'+event.series).then(()=> {
-      window.location.reload();
-    })
+    console.log(event);
+    let eve = event.toLowerCase();
+    if(eve == "Pased Tests") {
+
+    } else if(eve == "Failed Tests") {
+
+    } else  if(eve == "Skipped Tests") {
+
+    } else if(eve == "Manual Tests") {
+
+    } else {
+      this.router.navigateByUrl("/project/"+this.serviceName+ '/'+event.series).then(()=> {
+        window.location.reload();
+      })
+    }
   }
   
   private formData(stats: Map<any, any>) {
