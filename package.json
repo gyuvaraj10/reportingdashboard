@@ -26,7 +26,7 @@
     "chart.js": "^2.8.0",
     "chartjs-plugin-datalabels": "^0.6.0",
     "html2canvas": "^1.0.0-rc.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
     "ng2-charts": "^2.3.0",
     "popper.js": "^1.15.0",
